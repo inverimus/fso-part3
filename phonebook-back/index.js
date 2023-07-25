@@ -1,9 +1,11 @@
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 const app = express()
 
-const cors = require('cors')
 app.use(cors())
+app.use(express.json())
+app.use(express.static('dist'))
 
 morgan.token('body', (req, res) => { 
   if (req.method === 'POST') {
@@ -12,7 +14,6 @@ morgan.token('body', (req, res) => {
   return ''
 })
 
-app.use(express.json())
 app.use(morgan(function (tokens, req, res) {
   return [
     tokens.method(req, res),
@@ -46,10 +47,6 @@ let persons = [
     "number": "39-23-6423122"
   }
 ]
-
-app.get('/', (request, response) => {
-  response.send(`<p>Phonebook has info for ${persons.length} people<p><p>${Date(Date.now()).toString()}</p>`)
-})
 
 app.get('/info', (request, response) => {
   response.send(`<p>Phonebook has info for ${persons.length} people<p><p>${Date(Date.now()).toString()}</p>`)
