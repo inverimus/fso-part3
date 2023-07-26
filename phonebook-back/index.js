@@ -26,20 +26,6 @@ app.use(morgan((tokens, req, res) => {
   ].join(' ')
 }))
 
-const errorHandler = (error, request, response, next) => {
-  console.error(error.message)
-
-  if (error.name === 'CastError') {
-    return response.status(400).send({ error: 'malformatted id' })
-  }
-  else if (error.name === 'ValidationError') {
-    return response.status(400).send({ error: error.message })
-  }
-
-  next(error)
-}
-app.use(errorHandler)
-
 app.get('/info', (request, response, next) => {
   Person.find({}).then(persons => {
     response.send(`<p>Phonebook has info for ${persons.length} people<p><p>${Date(Date.now()).toLocaleString("en-US", {timeZone: "America/New_York"})}</p>`)
@@ -103,6 +89,20 @@ app.delete('/api/persons/:id', (request, response, next) => {
   })
   .catch(error => next(error))
 })
+
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  }
+  else if (error.name === 'ValidationError') {
+    return response.status(400).send({ error: error.message })
+  }
+
+  next(error)
+}
+app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {

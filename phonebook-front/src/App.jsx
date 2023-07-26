@@ -30,7 +30,6 @@ const App = () => {
     PersonService
       .getAll()
       .then(response => {
-        console.log(response.data)
         setPersons(response.data)
       })
   }, [])
@@ -63,14 +62,14 @@ const App = () => {
     PersonService
       .create(personObject)
       .then(response => {
-        setPersons(persons.concat(response.data))
-        setMessage({ type: 'success', text: `${response.data.name} added.`})
+        console.log(response)
+        setPersons(persons.concat(response))
+        setMessage({ type: 'success', text: `${response.name} added.`})
         setTimeout(() => setMessage(null), 5000)
         setNewName('')
         setNewNumber('')
       })
       .catch(error => {
-        console.log(error)
         setMessage({ type: 'error', text: `${error.response.data.error}`})
         setTimeout(() => setMessage(null), 5000)
       })
