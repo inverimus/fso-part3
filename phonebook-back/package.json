@@ -8,7 +8,7 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "local": "cd .. && git pull && cd phonebook-back && node index.js",
-    "build:ui": "rm -rf dist && cd ../phonebook-front/ && npm run build && cp -r dist ../phonebook-back",
+    "build:ui": "rm -rf dist && cd ../phonebook-front/ && npm run build -- --mode development && cp -r dist ../phonebook-back",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
   },
   "author": "Michael Green",

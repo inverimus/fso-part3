@@ -8,6 +8,7 @@ const app = express()
 app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
+
 morgan.token('body', (req, res) => { 
   if (req.method === 'POST') {
     return JSON.stringify(req.body)
@@ -45,7 +46,7 @@ app.get('/info', (request, response, next) => {
   })
 })
 
-app.get('/api/persons', (request, response, next) => {
+app.get('/api/persons', (request, response) => {
   Person.find({}).then(persons => {
     response.json(persons)
   })
