@@ -7,7 +7,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:local": "git pull && nodemon index.js",
+    "local": "cd .. && git pull && cd phonebook-back && node index.js",
     "build:ui": "rm -rf dist && cd ../phonebook-front/ && npm run build && cp -r dist ../phonebook-back",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
   },
