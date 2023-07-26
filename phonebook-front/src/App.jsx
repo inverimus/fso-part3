@@ -29,7 +29,10 @@ const App = () => {
   useEffect(() => {
     PersonService
       .getAll()
-      .then(response => {setPersons(response.data)})
+      .then(response => {
+        console.log(response.data)
+        setPersons(response.data)
+      })
   }, [])
 
   const handleNameChange = (event) => {
@@ -66,7 +69,11 @@ const App = () => {
         setNewName('')
         setNewNumber('')
       })
-      return
+      .catch(error => {
+        console.log(error)
+        setMessage({ type: 'error', text: `${error.response.data.error}`})
+        setTimeout(() => setMessage(null), 5000)
+      })
   }
 
   const updatePerson = (person) => {
