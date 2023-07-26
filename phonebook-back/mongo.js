@@ -30,6 +30,7 @@ if (process.argv.length < 5) {
     })
     mongoose.connection.close()
   })
+  exit()
 }
 
 const name = process.argv[3]
