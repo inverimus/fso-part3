@@ -12,7 +12,7 @@ const url = `mongodb+srv://fullstack:${password}@fullstackopen.ufoo92d.mongodb.n
 mongoose.set('strictQuery',false)
 
 mongoose.connect(url)
-  .then(result => { console.log('connected to MongoDB')})  
+  .then(() => { console.log('connected to MongoDB')})  
   .catch((error) => { console.log('error connecting to MongoDB:', error.message)})
 
 const personSchema = new mongoose.Schema({
@@ -23,7 +23,7 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model('Person', personSchema)
 
 if (process.argv.length < 5) {
-  console.log("phonebook:")
+  console.log('phonebook:')
   Person.find({}).then(result => {
     result.forEach(person => {
       console.log(`${person.name} ${person.number}`)
@@ -43,11 +43,11 @@ else {
   })
 
   person.save()
-    .then(result => {
+    .then(() => {
       console.log(`added ${name} number ${number} to phonebook`)
       mongoose.connection.close()
     })
     .catch((error) => { console.log('error saving to MongoDB:', error.message)  
       mongoose.connection.close()
     })
-  }
+}

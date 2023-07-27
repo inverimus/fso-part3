@@ -61,10 +61,9 @@ const App = () => {
 
     PersonService
       .create(personObject)
-      .then(response => {
-        console.log(response)
-        setPersons(persons.concat(response))
-        setMessage({ type: 'success', text: `${response.name} added.`})
+      .then(person => {
+        setPersons(persons.concat(person))
+        setMessage({ type: 'success', text: `${person.name} added.`})
         setTimeout(() => setMessage(null), 5000)
         setNewName('')
         setNewNumber('')
@@ -78,11 +77,11 @@ const App = () => {
   const updatePerson = (person) => {
     PersonService
       .update(person.id, {...person, number: newNumber})
-      .then(response => {
+      .then(updatedPerson => {
         setPersons(persons.map((item) => 
-          item.id != person.id ? item : response.data
+          item.id != person.id ? item : updatedPerson
         ))
-        setMessage({ type: 'success', text: `${response.data.name} updated.`})
+        setMessage({ type: 'success', text: `${updatedPerson.name} updated.`})
         setTimeout(() => setMessage(null), 5000)
         setNewName('')
         setNewNumber('')

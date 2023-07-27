@@ -8,8 +8,9 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "local": "cd .. && git pull && cd phonebook-back && node index.js",
-    "build:ui": "rm -rf dist && cd ../phonebook-front/ && npm run build -- --mode development && cp -r dist ../phonebook-back",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
+    "build:ui": "rm -rf build && cd ../phonebook-front/ && npm run build -- --mode development && cp -r dist ../phonebook-back/build",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
+    "lint": "eslint ."
   },
   "author": "Michael Green",
   "license": "MIT",
@@ -17,7 +18,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mongodb": "^5.7.0",
     "mongoose": "^7.4.1",
     "morgan": "^1.10.0",
     "static": "^2.0.0"
